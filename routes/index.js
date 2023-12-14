@@ -16,13 +16,73 @@ router.post('/u', function (req, res) {
   console.log("Імя: " + req.body.name)
   console.log("Номер: " + req.body.phone)
 
-  let data = req.body;
-  global.call.insertOne(data, function (err, ans) {
+  
+  global.call.insertOne(req.body, function (err, ans) {
     if (err)
       console.log(err);
     else console.log("ok")
   });
   res.end();
+});
+
+router.post('/tarrifs', function (req, res) {
+  console.log(req.body)
+  console.log("Тариф: " + req.body.type)
+  console.log("Імя: " + req.body.name)
+  console.log("Номер: " + req.body.phone)
+
+  let data = req.body;
+  global.otariff.insertOne(data, function (err, ans) {
+    if (err)
+      console.log(err);
+    else console.log("ok")
+  });
+  res.end();
+});
+
+router.post('/problem', function (req, res) {
+
+  let data = req.body;
+  global.oproblem.insertOne(data, function (err, ans) {
+    if (err)
+      console.log(err);
+    else console.log("ok")
+  });
+  res.end();
+});
+
+router.post('/main', function (req, res) {
+
+  let data = req.body;
+  global.main.insertOne(data, function (err, ans) {
+    if (err)
+      console.log(err);
+    else console.log("ok")
+  });
+  res.end();
+});
+
+router.post('/another', function (req, res) {
+
+  let data = req.body;
+  global.another.insertOne(data, function (err, ans) {
+    if (err)
+      console.log(err);
+    else console.log("ok")
+  });
+  res.end();
+});
+
+
+router.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username, password });
+
+  if (user) {
+    res.status(200).json({ message: 'Login successful' });
+  } else {
+    res.status(401).json({ message: 'Invalid credentials' });
+  }
 });
 
 router.get('/z', async function (req, res) {
@@ -43,19 +103,68 @@ router.get('/z', async function (req, res) {
 
 router.get('/n', async function (req, res) {
   let data;
-
-  // global.tariff.insertOne(data, function (err, ans) {
-  //   if (err)
-  //   console.log(err);
-  //   else console.log("ok")
-  // });
-
   data = await global.news.findOne({});
 
   console.log(data)
   res.send(JSON.stringify(data));
 });
 
+
+router.get('/a', async function (req, res) {
+  let data;
+  data = await global.actions.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/Zbarazherr', async function (req, res) {
+  let data;
+  data = await global.Zbarazherr.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/Zbarazh', async function (req, res) {
+  let data;
+  data = await global.Zbarazh.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/Khorostkiv', async function (req, res) {
+  let data;
+  data = await global.Khorostkiv.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/Khorostkiverr', async function (req, res) {
+  let data;
+  data = await global.Khorostkiverr.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/prob', async function (req, res) {
+  let data;
+  data = await global.oproblem.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
+
+router.get('/tar', async function (req, res) {
+  let data;
+  data = await global.otariff.findOne({});
+
+  console.log(data)
+  res.send(JSON.stringify(data));
+});
 
 // app.post('/create-reminder', addon.checkValidToken(),
 //   async (req, res) => {
