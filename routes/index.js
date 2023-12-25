@@ -120,15 +120,14 @@ router.get('/a', async function (req, res) {
 
 router.get('/Zbarazherr', async function (req, res) {
   let data;
-  data = await global.Zbarazherr.findOne({});
-
+  data = await global.Zbarazherr.find({}).toArray();
   console.log(data)
   res.send(JSON.stringify(data));
 });
 
 router.get('/Zbarazh', async function (req, res) {
   let data;
-  data = await global.Zbarazh.findOne({});
+  data = await global.Zbarazh.find({}).toArray();
 
   console.log(data)
   res.send(JSON.stringify(data));
@@ -136,7 +135,7 @@ router.get('/Zbarazh', async function (req, res) {
 
 router.get('/Khorostkiv', async function (req, res) {
   let data;
-  data = await global.Khorostkiv.findOne({});
+  data = await global.Khorostkiv.find({}).toArray();
 
   console.log(data)
   res.send(JSON.stringify(data));
@@ -144,7 +143,7 @@ router.get('/Khorostkiv', async function (req, res) {
 
 router.get('/Khorostkiverr', async function (req, res) {
   let data;
-  data = await global.Khorostkiverr.findOne({});
+  data = await global.Khorostkiverr.find({}).toArray();
 
   console.log(data)
   res.send(JSON.stringify(data));
@@ -159,10 +158,23 @@ router.get('/prob', async function (req, res) {
 
 router.get('/tar', async function (req, res) {
   let data;
-  data = await global.otariff.findOne({});
+  data = await global.otariff.find({}).toArray();
 
   console.log(data)
   res.send(JSON.stringify(data));
+});
+
+router.post('/check-login', async function (req, res) {
+  const { username, password } = req.body;
+
+  // Здійснюємо запит до бази даних для перевірки логіну та паролю
+  const user = await global.login.findOne({ username, password });
+
+  if (user) {
+    res.json({ success: true });
+  } else {
+    res.json({ success: false });
+  }
 });
 
 // app.post('/create-reminder', addon.checkValidToken(),
