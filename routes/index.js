@@ -152,8 +152,7 @@ router.get('/Khorostkiverr', async function (req, res) {
 
 router.get('/prob', async function (req, res) {
   let data;
-  data = await global.oproblem.findOne({});
-
+  data = await global.oproblem.find({}).toArray(); 
   console.log(data)
   res.send(JSON.stringify(data));
 });
